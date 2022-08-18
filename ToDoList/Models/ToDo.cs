@@ -16,7 +16,7 @@ namespace ToDoList.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength(300, MinimumLength = 1)]
+        [StringLength(256, MinimumLength = 1)]
         public string Describtion { get; set; }
 
         public string Difficulty { get; set; }

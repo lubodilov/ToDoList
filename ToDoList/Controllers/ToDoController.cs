@@ -49,6 +49,7 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> EditAsync(int id)
         {
             User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+            //ToDoDTO toDoDTO = toDoService.GetDtoById(id);
             ToDo toDo = toDoService.GetById(id);
             if (user is null)
             {
