@@ -26,7 +26,7 @@ namespace ToDoList.Controllers
 
             return View(toDoes);
         }
-        public async Task<IActionResult> UserToDoesAsync()
+        public async Task<IActionResult> UserToDoes()
         {
             User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
             if (user is null)
@@ -67,14 +67,14 @@ namespace ToDoList.Controllers
             User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
             if (user is null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             if (toDoService.GetById(id).UserId != user.Id)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             toDoService.Edit(toDo);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(UserToDoes));
         }
         [HttpGet]
         public IActionResult Create()
@@ -87,14 +87,14 @@ namespace ToDoList.Controllers
             User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
             if (user is null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             if (!ModelState.IsValid)
             {
                 return View();
             }
             toDoService.Create(toDo, user);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(UserToDoes));
         }
         [HttpGet]
         public async Task<IActionResult> DeleteAsync(int id)
@@ -103,11 +103,11 @@ namespace ToDoList.Controllers
             ToDo toDo = toDoService.GetById(id);
             if (user is null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             if (toDo.UserId != user.Id)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             return View(toDo);
         }
@@ -117,14 +117,14 @@ namespace ToDoList.Controllers
             ToDo toDo = toDoService.GetById(id);
             if (user is null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             if (toDo.UserId != user.Id)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             toDoService.Delete(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(UserToDoes));
         }
         [HttpGet]
         public IActionResult ViewToDo(int id)

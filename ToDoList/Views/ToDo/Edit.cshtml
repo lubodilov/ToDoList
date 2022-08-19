@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity;
-@model ToDoList.Models.DTOs.ToDoDTO
+@model ToDoList.Models.ToDo
 @inject SignInManager<User> signinManager;
 
 @{
@@ -44,7 +44,7 @@
 </div>
 
 <div>
-    <a class="btn btn-outline-dark" asp-action="Index">Back to List</a>
+    <a class="btn btn-outline-dark" asp-action="UserToDoes">Back to List</a>
 </div>
 
 @section Scripts {
