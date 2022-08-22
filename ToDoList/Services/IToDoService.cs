@@ -16,5 +16,6 @@ namespace ToDoList.Services
         void Create(ToDo actor, User user);
         List<ToDoDTO> GetAll();
         List<ToDoDTO> GetUserToDoes(int id);
+        List<ToDoDTO> GetUserToDoesSearch(int id, string SearchPrase);
     }
 }

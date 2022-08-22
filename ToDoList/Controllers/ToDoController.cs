@@ -36,6 +36,23 @@ namespace ToDoList.Controllers
             List<ToDoDTO> toDoes = toDoService.GetUserToDoes(user.Id);
             return View(toDoes);
         }
+
+        public IActionResult ShowSearchForm()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> ShowSearchResult(String SearchPhrase)
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+            if (user is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            List<ToDoDTO> toDoes = toDoService.GetUserToDoesSearch(user.Id, SearchPhrase);
+            return View(toDoes);
+        }
+
         public IActionResult Details(int id)
         {
             ToDoDTO toDo = toDoService.GetDtoById(id);

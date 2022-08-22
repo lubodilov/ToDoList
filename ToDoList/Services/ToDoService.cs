@@ -95,6 +95,13 @@ namespace ToDoList.Services
                 .Select(p => ToDto(p))
                 .ToList<ToDoDTO>();
         }
+        public List<ToDoDTO> GetUserToDoesSearch(int id, string SearchPrase)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id && (p.Name == SearchPrase || p.Difficulty == SearchPrase))
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
         private static ToDoDTO ToDto(ToDo t)
         {
             ToDoDTO toDo = new ToDoDTO();
