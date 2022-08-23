@@ -53,6 +53,26 @@ namespace ToDoList.Controllers
             return View(toDoes);
         }
 
+        public async Task<IActionResult> SortName(String SortOrder)
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+            if (user is null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            List<ToDoDTO> toDoes = toDoService.GetUserToDoes(user.Id);
+            List<ToDoDTO> sortName;
+            if (SortOrder == "desc")
+            {
+                sortName = toDoes.OrderByDescending(a => a.Name).ToList();
+            }
+            else
+            {
+                sortName = toDoes.OrderBy(a => a.Name).ToList();
+            }
+            return View(sortName);
+        }
+
         public IActionResult Details(int id)
         {
             ToDoDTO toDo = toDoService.GetDtoById(id);

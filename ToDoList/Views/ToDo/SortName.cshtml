@@ -5,22 +5,15 @@
 @inject SignInManager<User> signinManager;
 
 @{
-    ViewData["Title"] = "UserToDoes";
+    ViewData["Title"] = "SorName";
 }
-<h1>These are the tasks you have created </h1>
+<h1>These are the tasks sorted by Name </h1>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                <!--<a class="btn btn-group-lg" asp-action="SortName"> <strong> Name  </strong> </a>-->
-                <form asp-action="SortName">
-                    <div class="form-group">
-                        <strong><input type="submit" value="Name" class="btn btn-group-lg /></strong>
-                        <label for="SortOrder" class="control-label"></label>
-                        <input name="SortOrder" class="form-control" />
-                    </div>
-                </form>
+                <strong>Name</strong>
             </th>
             <th>
                 <strong>Describtion</strong>
@@ -55,19 +48,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.EndDate)
                 </td>
-                <td>
-                    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
             </tr>
         }
     </tbody>
 </table>
 @if (this.signinManager.IsSignedIn(User))
 {
-    <a class="btn btn-outline-primary" asp-area="" asp-controller="ToDo" asp-action="Create">Create</a>
-    <a class="btn btn-outline-info" asp-area="" asp-controller="ToDo" asp-action="ShowSearchForm">Search for a task</a>
+    <a class="btn btn-outline-dark" asp-area="" asp-controller="ToDo" asp-action="UserToDoes">Back to List</a>
 }
 else
 {
