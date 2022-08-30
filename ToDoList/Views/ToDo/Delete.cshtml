@@ -1,0 +1,4 @@
+﻿@model ToDo
+<h1>Are you sure you want to delete the Task?</h1>
+<a asp-action="ConfirmDelete" asp-route-id="@Model.Id" asp-controller="ToDO" class="btn btn-outline-danger">Delete</a>
+<a asp-action="UserToDoes" asp-controller="ToDO" class="btn btn-outline-light">Cancel</a>

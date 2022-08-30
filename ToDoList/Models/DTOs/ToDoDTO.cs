@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ToDoList.Models
-{   
-    public class ToDo
+namespace ToDoList.Models.DTOs
+{
+    public class ToDoDTO
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(30, MinimumLength = 1)]
+        [Required(ErrorMessage = "The name is required.")]
         public string Name { get; set; }
 
-        [Required]
-        [StringLength(256, MinimumLength = 1)]
+        [Required(ErrorMessage = "The describtion is required.")]
         public string Describtion { get; set; }
 
         public string Difficulty { get; set; }
@@ -25,16 +22,16 @@ namespace ToDoList.Models
 
         public DateTime EndDate { get; set; }
 
-        [ForeignKey("User")]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string CreatedBy { get; set; }
 
-        public ToDo()
+        public string UserEmail { get; set; }
+
+        public ToDoDTO()
         {
-
+                
         }
 
-        public ToDo(int id, string name, string describtion, string difficulty, DateTime startDate, DateTime endDate, int userId, User user)
+        public ToDoDTO(int id, string name, string describtion, string difficulty, DateTime startDate, DateTime endDate, string createdBy, string userEmail)
         {
             Id = id;
             Name = name;
@@ -42,8 +39,8 @@ namespace ToDoList.Models
             Difficulty = difficulty;
             StartDate = startDate;
             EndDate = endDate;
-            UserId = userId;
-            User = user;
+            CreatedBy = createdBy;
+            UserEmail = userEmail;
         }
     }
 }

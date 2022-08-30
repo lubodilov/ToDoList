@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using ToDoList.Data;
+@using ToDoList.Models.DTOs;
+@model List<ToDoDTO>
+@inject SignInManager<User> signinManager;
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <strong>Name</strong>
+            </th>
+            <th>
+                <strong>Describtion</strong>
+            </th>
+            <th>
+                <strong>Difficulty</strong>
+            </th>
+            <th>
+                <strong>StartDate</strong>
+            </th>
+            <th>
+                <strong>EndDate</strong>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Describtion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Difficulty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    <a class="btn btn-outline-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a class="btn btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (this.signinManager.IsSignedIn(User))
+{
+    <a class="btn btn-outline-primary" asp-area="" asp-controller="ToDo" asp-action="Create">Create task</a>
+}
+else
+{
+    <p>Login to create a task</p>
+    <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Login</a>
+}

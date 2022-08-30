@@ -1,0 +1,63 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using ToDoList.Data;
+@using ToDoList.Models.DTOs;
+@model List<ToDoDTO>
+@inject SignInManager<User> signinManager;
+
+@{
+    ViewData["Title"] = "SortDif";
+}
+<h1>These are the tasks sorted by Difficulty </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a class="btn btn-group-lg" asp-action="SortNameDesc"> <strong> Name  </strong> </a>
+            </th>
+            <th>
+                <a class="btn btn-group-lg" asp-action="SortDescribtionDesc"> <strong>Describtion</strong> </a>
+            </th>
+            <th>
+                <a class="btn btn-group-lg" asp-action="SortDifficultyDesc"> <strong>Difficulty</strong> </a>
+            </th>
+            <th>
+                <a class="btn btn-group-lg" asp-action="SortStartDateDesc"> <strong>StartDate</strong> </a>
+            </th>
+            <th>
+                <a class="btn btn-group-lg" asp-action="SortEndDateDesc"> <strong>EndDate</strong> </a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Describtion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Difficulty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if (this.signinManager.IsSignedIn(User))
+{
+    <a class="btn btn-outline-dark" asp-area="" asp-controller="ToDo" asp-action="UserToDoes">Back to List</a>
+}
+else
+{
+    <p>Login to create a task</p>
+    <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Login</a>
+}
