@@ -95,6 +95,10 @@ namespace ToDoList.Services
                 .Select(p => ToDto(p))
                 .ToList<ToDoDTO>();
         }
+        //
+        //Summary:
+        //  Returns all toDoes having the given userId and Name
+        //
         public List<ToDoDTO> GetUserToDoesName(int id, string SearchPrase)
         {
             return dbContext.ToDoes
@@ -102,6 +106,10 @@ namespace ToDoList.Services
                 .Select(p => ToDto(p))
                 .ToList<ToDoDTO>();
         }
+        //
+        //Summary:
+        //  Returns all toDoes having the given userId and Difficulty
+        //
         public List<ToDoDTO> GetUserToDoesDifficulty(int id, string SearchPrase)
         {
             return dbContext.ToDoes
@@ -109,6 +117,10 @@ namespace ToDoList.Services
                 .Select(p => ToDto(p))
                 .ToList<ToDoDTO>();
         }
+        //
+        //Summary:
+        //  Returns list of all toDoes which are sorted in ascending order by Name
+        //
         public List<ToDoDTO> GetToDoSortName(int id)
         {
             return dbContext.ToDoes
@@ -117,6 +129,10 @@ namespace ToDoList.Services
                 .Select(p => ToDto(p))
                 .ToList<ToDoDTO>();
         }
+        //
+        //Summary:
+        //  Returns list of all toDoes which are sorted in descending order by Name
+        //
         public List<ToDoDTO> GetToDoSortNameDesc(int id)
         {
             return dbContext.ToDoes
