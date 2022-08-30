@@ -29,10 +29,6 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> UserToDoes()
         {
             User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
-            if (user is null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
             List<ToDoDTO> toDoes = toDoService.GetUserToDoes(user.Id);
             return View(toDoes);
         }
@@ -42,35 +38,83 @@ namespace ToDoList.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ShowSearchResult(String SearchPhrase)
+        public async Task<IActionResult> ShowSearchResultName(String SearchPhrase)
         {
             User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
-            if (user is null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            List<ToDoDTO> toDoes = toDoService.GetUserToDoesSearch(user.Id, SearchPhrase);
+            List<ToDoDTO> toDoes = toDoService.GetUserToDoesName(user.Id, SearchPhrase);
             return View(toDoes);
         }
 
-        public async Task<IActionResult> SortName(String SortOrder)
+        public async Task<IActionResult> ShowSearchResultDifficulty(String SearchPhrase)
         {
             User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
-            if (user is null)
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            List<ToDoDTO> toDoes = toDoService.GetUserToDoes(user.Id);
-            List<ToDoDTO> sortName;
-            if (SortOrder == "desc")
-            {
-                sortName = toDoes.OrderByDescending(a => a.Name).ToList();
-            }
-            else
-            {
-                sortName = toDoes.OrderBy(a => a.Name).ToList();
-            }
-            return View(sortName);
+            List<ToDoDTO> toDoes = toDoService.GetUserToDoesDifficulty(user.Id, SearchPhrase);
+            return View(toDoes);
+        }
+
+        public async Task<IActionResult> SortName()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+ 
+            return View(toDoService.GetToDoSortName(user.Id));
+        }
+
+        public async Task<IActionResult> SortNameDesc()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+
+            return View(toDoService.GetToDoSortNameDesc(user.Id));
+        }
+        public async Task<IActionResult> SortDescribtion()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+
+            return View(toDoService.GetToDoSortDescribtion(user.Id));
+        }
+        public async Task<IActionResult> SortDescribtionDesc()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+            
+            return View(toDoService.GetToDoSortDescribtionDesc(user.Id));
+        }
+
+        public async Task<IActionResult> SortDifficulty()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+
+            return View(toDoService.GetToDoSortDifficulty(user.Id));
+        }
+        public async Task<IActionResult> SortDifficultyDesc()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+
+            return View(toDoService.GetToDoSortDifficultyDesc(user.Id));
+        }
+
+        public async Task<IActionResult> SortStartDate()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+
+            return View(toDoService.GetToDoSortStartDate(user.Id));
+        }
+        public async Task<IActionResult> SortStartDateDesc()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+
+            return View(toDoService.GetToDoSortStartDateDesc(user.Id));
+        }
+
+        public async Task<IActionResult> SortEndDate()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+
+            return View(toDoService.GetToDoSortEndDate(user.Id));
+        }
+        public async Task<IActionResult> SortEndDateDesc()
+        {
+            User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
+
+            return View(toDoService.GetToDoSortEndDateDesc(user.Id));
         }
 
         public IActionResult Details(int id)
@@ -86,15 +130,14 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> EditAsync(int id)
         {
             User user = await userManager.GetUserAsync(User).ConfigureAwait(false);
-            //ToDoDTO toDoDTO = toDoService.GetDtoById(id);
             ToDo toDo = toDoService.GetById(id);
             if (user is null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             if (toDo.UserId != user.Id)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(UserToDoes));
             }
             return View(toDoService.GetById(id));
         }

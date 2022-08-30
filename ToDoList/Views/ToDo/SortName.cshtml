@@ -5,7 +5,7 @@
 @inject SignInManager<User> signinManager;
 
 @{
-    ViewData["Title"] = "SorName";
+    ViewData["Title"] = "SortName";
 }
 <h1>These are the tasks sorted by Name </h1>
 
@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                <strong>Name</strong>
+                <a class="btn btn-group-lg" asp-action="SortNameDesc"> <strong> Name  </strong> </a>
             </th>
             <th>
-                <strong>Describtion</strong>
+                <a class="btn btn-group-lg" asp-action="SortDescribtionDesc"> <strong>Describtion</strong> </a>
             </th>
             <th>
-                <strong>Difficulty</strong>
+                <a class="btn btn-group-lg" asp-action="SortDifficultyDesc"> <strong>Difficulty</strong> </a>
             </th>
             <th>
-                <strong>StartDate</strong>
+                <a class="btn btn-group-lg" asp-action="SortStartDateDesc"> <strong>StartDate</strong> </a>
             </th>
             <th>
-                <strong>EndDate</strong>
+                <a class="btn btn-group-lg" asp-action="SortEndDateDesc"> <strong>EndDate</strong> </a>
             </th>
         </tr>
     </thead>

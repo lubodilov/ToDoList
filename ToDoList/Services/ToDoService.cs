@@ -95,10 +95,97 @@ namespace ToDoList.Services
                 .Select(p => ToDto(p))
                 .ToList<ToDoDTO>();
         }
-        public List<ToDoDTO> GetUserToDoesSearch(int id, string SearchPrase)
+        public List<ToDoDTO> GetUserToDoesName(int id, string SearchPrase)
         {
             return dbContext.ToDoes
-                .Where(p => p.UserId == id && (p.Name == SearchPrase || p.Difficulty == SearchPrase))
+                .Where(p => p.UserId == id && p.Name == SearchPrase)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetUserToDoesDifficulty(int id, string SearchPrase)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id && p.Difficulty == SearchPrase)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortName(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderBy(p => p.Name)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortNameDesc(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderByDescending(p => p.Name)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortDescribtion(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderBy(p => p.Describtion)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortDescribtionDesc(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderByDescending(p => p.Describtion)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortDifficulty(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderBy(p => p.Difficulty)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortDifficultyDesc(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderByDescending(p => p.Difficulty)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortStartDate(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderBy(p => p.StartDate)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortStartDateDesc(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderByDescending(p => p.StartDate)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortEndDate(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderBy(p => p.EndDate)
+                .Select(p => ToDto(p))
+                .ToList<ToDoDTO>();
+        }
+        public List<ToDoDTO> GetToDoSortEndDateDesc(int id)
+        {
+            return dbContext.ToDoes
+                .Where(p => p.UserId == id)
+                .OrderByDescending(p => p.EndDate)
                 .Select(p => ToDto(p))
                 .ToList<ToDoDTO>();
         }

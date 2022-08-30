@@ -16,6 +16,17 @@ namespace ToDoList.Services
         void Create(ToDo actor, User user);
         List<ToDoDTO> GetAll();
         List<ToDoDTO> GetUserToDoes(int id);
-        List<ToDoDTO> GetUserToDoesSearch(int id, string SearchPrase);
+        List<ToDoDTO> GetUserToDoesName(int id, string SearchPrase);
+        List<ToDoDTO> GetUserToDoesDifficulty(int id, string SearchPrase);
+        List<ToDoDTO> GetToDoSortName(int id);
+        List<ToDoDTO> GetToDoSortNameDesc(int id);
+        List<ToDoDTO> GetToDoSortDescribtion(int id);
+        List<ToDoDTO> GetToDoSortDescribtionDesc(int id);
+        List<ToDoDTO> GetToDoSortDifficulty(int id);
+        List<ToDoDTO> GetToDoSortDifficultyDesc(int id);
+        List<ToDoDTO> GetToDoSortStartDate(int id);
+        List<ToDoDTO> GetToDoSortStartDateDesc(int id);
+        List<ToDoDTO> GetToDoSortEndDate(int id);
+        List<ToDoDTO> GetToDoSortEndDateDesc(int id);
     }
 }
