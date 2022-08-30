@@ -126,6 +126,88 @@ namespace Test
             Assert.AreEqual("Work", toDoes[0].Name);
         }
 
+        [Test]
+        public void TestGetToDoByName()
+        {
+            DateTime today = DateTime.Today;
+            ToDo toDo5 = CreateToDo(5, "Work 5", "describtion 5", "easy 5", today, today, userId);
+            ToDo toDo6 = CreateToDo(6, "Work 6", "describtion 6", "easy 6", today, today, userId);
+            ToDo toDo7 = CreateToDo(7, "Work 7", "describtion 7", "easy 7", today, today, userId);
+            User user = new User();
+
+            toDoService.Create(toDo5, user);
+            toDoService.Create(toDo6, user);
+            toDoService.Create(toDo7, user);
+            string name = toDo6.Name;
+            List<ToDoDTO> toDoes = toDoService.GetUserToDoesName(userId, name);
+
+
+            Assert.AreEqual(1, toDoes.Count);
+            Assert.AreEqual("easy 6", toDoes[0].Difficulty);
+        }
+
+        [Test]
+        public void TestGetToDoByDifficulty()
+        {
+            DateTime today = DateTime.Today;
+            ToDo toDo5 = CreateToDo(5, "Work 5", "describtion 5", "easy 5", today, today, userId);
+            ToDo toDo6 = CreateToDo(6, "Work 6", "describtion 6", "easy 6", today, today, userId);
+            ToDo toDo7 = CreateToDo(7, "Work 7", "describtion 7", "easy 7", today, today, userId);
+            User user = new User();
+
+            toDoService.Create(toDo5, user);
+            toDoService.Create(toDo6, user);
+            toDoService.Create(toDo7, user);
+            string name = toDo6.Difficulty;
+            List<ToDoDTO> toDoes = toDoService.GetUserToDoesDifficulty(userId, name);
+
+
+            Assert.AreEqual(1, toDoes.Count);
+            Assert.AreEqual("Work 6", toDoes[0].Name);
+        }
+
+        [Test]
+        public void TestSortToDoByName()
+        {
+            DateTime today = DateTime.Today;
+            ToDo toDo5 = CreateToDo(5, "AAA", "describtion 5", "easy 5", today, today, userId);
+            ToDo toDo6 = CreateToDo(6, "CCC", "describtion 6", "easy 6", today, today, userId);
+            ToDo toDo7 = CreateToDo(7, "BBB", "describtion 7", "easy 7", today, today, userId);
+            User user = new User();
+
+            toDoService.Create(toDo5, user);
+            toDoService.Create(toDo6, user);
+            toDoService.Create(toDo7, user);
+            
+            List<ToDoDTO> toDoes = toDoService.GetToDoSortName(userId);
+
+
+            Assert.AreEqual("easy 5", toDoes[0].Difficulty);
+            Assert.AreEqual("easy 7", toDoes[1].Difficulty);
+            Assert.AreEqual("easy 6", toDoes[2].Difficulty);
+        }
+
+        [Test]
+        public void TestSortToDoByNameDesc()
+        {
+            DateTime today = DateTime.Today;
+            ToDo toDo5 = CreateToDo(5, "XXX", "describtion 5", "easy 5", today, today, userId);
+            ToDo toDo6 = CreateToDo(6, "ZZZ", "describtion 6", "easy 6", today, today, userId);
+            ToDo toDo7 = CreateToDo(7, "YYY", "describtion 7", "easy 7", today, today, userId);
+            User user = new User();
+
+            toDoService.Create(toDo5, user);
+            toDoService.Create(toDo6, user);
+            toDoService.Create(toDo7, user);
+
+            List<ToDoDTO> toDoes = toDoService.GetToDoSortNameDesc(userId);
+
+
+            //Assert.AreEqual(3, toDoes.Count);
+            Assert.AreEqual("ZZZ", toDoes[0].Name);
+            Assert.AreEqual("YYY", toDoes[1].Name);
+            Assert.AreEqual("XXX", toDoes[2].Name);
+        }
 
         [TearDown]
         public void TearDown()
